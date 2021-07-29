@@ -10,4 +10,15 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!--Here  is for Linear layout-->
+    <string name="input_number_linearLayout">Please input a number</string>
+    <string name="activity_box_objectSize">请输入物品大小</string>
+    <string name="activity_box_length">长</string>
+    <string name="activity_box_length_hint">请输入长</string>
+    <string name="activity_box_width">宽</string>
+    <string name="activity_box_width_hint">请输入宽</string>
+    <string name="activity_box_height">高</string>
+    <string name="activity_box_height_hint">请输入高</string>
+    <string name="activity_box_confirm_button">确认</string>
 </resources>
