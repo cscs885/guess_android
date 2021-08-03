@@ -1,21 +1,26 @@
-//package com.huawei.guess2021cs
-//
-//import java.util.*
-////import kotlin.random.*;
-//
-//class SecrectNumber {
-//    private var secrect_number:Int = 0;
-//
-//    fun getSecrectNum():Int{
-//        return this.secrect_number;
-//    }
-//
-//    fun setSecrectNum(start:Int,end:Int)
-//    {
-//        this.secrect_number= (Random().nextDouble()*(end-start+1)+start).toInt();
-//    }
-//}
-//
+package com.huawei.guess2021cs
+
+import java.util.*
+
+class SecretNumber {
+    private var secret_number:Int = 0;
+
+    fun getSecretNum():Int{
+        return this.secret_number;
+    }
+
+    fun setSecretNum(start:Int,end:Int)
+    {
+        this.secret_number= (Random().nextDouble()*(end-start+1)+start).toInt();
+    }
+
+    fun validate(n :Int) :Int
+    {
+        var secret_number = getSecretNum();
+        return secret_number-n;
+    }
+}
+
 //fun main()
 //{
 //    val secrectNumber = SecrectNumber();
