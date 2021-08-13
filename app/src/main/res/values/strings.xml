@@ -21,4 +21,12 @@
     <string name="activity_box_height">高</string>
     <string name="activity_box_height_hint">请输入高</string>
     <string name="activity_box_confirm_button">确认</string>
+    <string name="please_input_two_numbers">Please input two numbers(positive)</string>
+    <string name="you_got_it">you got it !!</string>
+    <string name="please_guess_a_bigger_number">please guess a bigger number</string>
+    <string name="please_guess_a_smaller_number">please guess a smaller number</string>
+    <string name="guess_message">Guess Message</string>
+    <string name="guess_a_number">Guess a number</string>
+    <string name="title_activity_material">MaterialActivity</string>
+    <string name="clear_all_data">clear all data</string>
 </resources>

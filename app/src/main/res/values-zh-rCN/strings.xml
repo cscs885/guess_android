@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">猜数字</string>
+    <string name="please_input_two_numbers">请输入两个数字（自然数）</string>
+    <string name="you_got_it">猜对了</string>
+    <string name="ok">确认</string>
+    <string name="please_guess_a_bigger_number">请猜大一点</string>
+    <string name="please_guess_a_smaller_number">请猜小一点</string>
+    <string name="guess_message">提示信息</string>
+    <string name="guess_a_number">输入一个数字猜一下</string>
+    <string name="clear_all_data">清除所有数据</string>
+</resources>
