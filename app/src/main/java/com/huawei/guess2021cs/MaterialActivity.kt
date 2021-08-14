@@ -7,7 +7,6 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
 import com.huawei.guess2021cs.databinding.ActivityMaterialBinding
@@ -19,11 +18,15 @@ class MaterialActivity : AppCompatActivity() {
     private lateinit var viewModel: GuessViewModel
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMaterialBinding
+    private  lateinit var alertDialog: AlertDialog
+    private lateinit var builder:AlertDialog.Builder
     val secretNumber = SecretNumber();
     val TAG = MaterialActivity::class.java.simpleName;
+    var message:String = "";
     var num1 = 0;
     var num2 = 0
-    var message = "";
+
+
    // var
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,29 +40,28 @@ class MaterialActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        this.builder = AlertDialog.Builder(this)
+        builder.setTitle("GuessMessege")
+            .setPositiveButton("ok",null)
         viewModel.result.observe(this, Observer {result ->
-             when(result)
+            when(result)
             {
-                GameResult.BIGGER -> message = R.string.please_guess_a_bigger_number.toString()
-                GameResult.SMALLER-> message = R.string.please_guess_a_smaller_number.toString()
+                GameResult.BIGGER -> message = resources.getString(R.string.please_guess_a_bigger_number)
+                GameResult.SMALLER-> message = resources.getString(R.string.please_guess_a_smaller_number)
                 GameResult.NUMBER_RIGHT ->{
-                    message = R.string.you_got_it.toString()
+                    message = resources.getString(R.string.you_got_it)
                     val intent = Intent(this,RecordActivity::class.java)
                     startActivity(intent);
                 }
             }
-//            AlertDialog.Builder(this,message.toInt())
-//                .setTitle("GuessMessege")
-//                .setMessage("Are you sure?")
-//                .setPositiveButton("yes",null)
-//                .show();
-
+            builder.setMessage(message)
+            builder.show();
         })
 
         binding.fab.setOnClickListener { view ->
             viewModel.reset();
-
         }
+
     }
 
 //    private fun replay()

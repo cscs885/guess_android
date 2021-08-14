@@ -41,7 +41,7 @@ class GuessViewModel : ViewModel(){
     }
 }
 
-enum class  GameResult
+enum class GameResult
 {
     NUMBER_RIGHT,BIGGER,SMALLER
 }
