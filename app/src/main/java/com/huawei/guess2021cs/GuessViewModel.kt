@@ -1,5 +1,7 @@
 package com.huawei.guess2021cs
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.util.*
@@ -32,12 +34,13 @@ class GuessViewModel : ViewModel(){
         secret = Random().nextInt(5)+1;
         count= 0;
         counter.value = count;
-        println(secret);
+        println(secret)
     }
 
     fun generate(start:Int,end:Int)
     {
         secret= (Random().nextDouble()*(end-start+1)+start).toInt();
+        Log.d(ContentValues.TAG, "oncreate:${this.secret} ");
     }
 }
 

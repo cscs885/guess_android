@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_input2numbers" />
 
     <Button
-        android:id="@+id/button_inputNumber"
+        android:id="@+id/cont_mat_ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_inputNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/cont_mat_ok" />
 
     <TextView
         android:id="@+id/textView_guessNumber"
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView_guessNumber" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/cont_mat_guess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
