@@ -1,6 +1,7 @@
 package com.huawei.guess2021cs
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.ui.AppBarConfiguration
+import com.huawei.guess2021cs.data.GameDatabase
 import com.huawei.guess2021cs.databinding.ActivityMaterialBinding
 import kotlinx.android.synthetic.main.content_material.*
-import java.io.Serializable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 //@Parcelize
 class MaterialActivity : AppCompatActivity()  {
@@ -22,7 +26,7 @@ class MaterialActivity : AppCompatActivity()  {
     private lateinit var binding: ActivityMaterialBinding
     private  lateinit var alertDialog: AlertDialog
     private lateinit var builder:AlertDialog.Builder
-    private final val QUEST_CODE = 100;
+    private final val QUEST_CODE_100 = 100;
     val secretNumber = SecretNumber();
     val TAG = MaterialActivity::class.java.simpleName;
     var message:String = "";
@@ -42,6 +46,7 @@ class MaterialActivity : AppCompatActivity()  {
 
         this.builder = AlertDialog.Builder(this)
         builder.setTitle("GuessMessege")
+
         viewModel.result.observe(this, Observer {result ->
             when(result)
             {
@@ -56,34 +61,33 @@ class MaterialActivity : AppCompatActivity()  {
                 GameResult.NUMBER_RIGHT ->{
                     builder.setMessage(resources.getString(R.string.you_got_it))
                     builder.setPositiveButton("ok"){dialog,which->
-                        val intent = Intent(this,RecordActivity::class.java)
-                        intent.putExtra("COUNTER",viewModel.count)//
-                        startActivityForResult(intent,QUEST_CODE)
+                        Intent(this,RecordActivity::class.java).apply{
+                          putExtra("COUNTER",viewModel.count)
+                        }.also { intent->
+                            startActivityForResult(intent,QUEST_CODE_100)
+                        }
                         //intent.putExtra("VIEWMODEL",builder)
                         //startActivity(intent)
                     }.show();
                 }
             }
-
         })
 
         binding.fab.setOnClickListener { view ->
-            viewModel.reset();
-            ediText_inputNumber1.setText("");
-            ediText_inputNumber2.setText("");
-            ediText_guessNumber.setText("");
+            reset();
         }
 
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==QUEST_CODE) {
-            val nickname = intent.getStringExtra("NICK")
-            Log.d(TAG, "nicknameOn:$nickname ");
+        if(requestCode==QUEST_CODE_100) {
+
             if(resultCode== Activity.RESULT_OK)
             {
-                viewModel.reset();
+                val nickname = data?.getStringExtra("NICK")
+                Log.d(TAG, "nicknameOn:$nickname ");
+                reset();
             }
         }
     }
@@ -119,12 +123,28 @@ class MaterialActivity : AppCompatActivity()  {
         Log.d(TAG, "onDestroy: ");
     }
 
+    fun reset()
+    {
+        AlertDialog.Builder(this)
+            .setTitle("Replay Message")
+            .setMessage("Are you sure?")
+            .setPositiveButton("yes"){dialog,listener->
+                viewModel.reset();
+                ediText_inputNumber1.setText("");
+                ediText_inputNumber2.setText("");
+                ediText_guessNumber.setText("");
+            }
+            .setNegativeButton("cancle",null)
+            .show();
+    }
+
     fun generate(view: View)
     {
 
             num1= ediText_inputNumber1.text.toString().toInt();
             num2= ediText_inputNumber2.text.toString().toInt();
             viewModel.generate(num1,num2);
+            Log.d(ContentValues.TAG, "oncreate:${viewModel.secret} ");
     }
 
     fun guess(view :View)
@@ -154,11 +174,29 @@ class MaterialActivity : AppCompatActivity()  {
     }
     fun test(view:View)
     {
-        val count = getSharedPreferences("guess", MODE_PRIVATE)
-                    .getInt("REC_COUNTER",-1)
-        val nickname = getSharedPreferences("guess", MODE_PRIVATE)
-                       .getString("REC_NICKNAME",null)
-        Log.d(TAG, "count/nickname : $count/$nickname");
-    }
 
+//        CoroutineScope(Dispatchers.IO).launch {
+//
+//            val list = GameDatabase.getInstance(this)?.recordDao()?.getAll();
+//            //第一种遍历
+//            list?.forEach {
+//                val nickname = it.nickname
+//                val count = it.count
+//                Log.d(TAG, "nickname/count : $nickname/$count ");
+//            }
+//            //第二种遍历
+////            val iterator= list?.iterator()
+////            if(iterator!=null) {
+////                while(iterator.hasNext()) {
+////                    val record = iterator.next();
+////                    println("nickname/counter:${record.nickname}/${record.count}")
+////                }
+////            }
+//
+////        val count = getSharedPreferences("guess", MODE_PRIVATE)
+////                    .getInt("REC_COUNTER",-1)
+////        val nickname = getSharedPreferences("guess", MODE_PRIVATE)
+////                       .getString("REC_NICKNAME",null)
+//            //Log.d(TAG, "count/nickname : $count/$nickname");
+    }
 }

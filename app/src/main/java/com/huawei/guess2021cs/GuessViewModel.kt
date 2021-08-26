@@ -40,7 +40,7 @@ class GuessViewModel : ViewModel(){
     fun generate(start:Int,end:Int)
     {
         secret= (Random().nextDouble()*(end-start+1)+start).toInt();
-        Log.d(ContentValues.TAG, "oncreate:${this.secret} ");
+
     }
 }
 

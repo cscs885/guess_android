@@ -9,20 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Guess_2021_CS">
-        <activity android:name=".RecordActivity"></activity>
+
         <activity
             android:name=".MaterialActivity"
             android:label="@string/title_activity_material"
-            android:theme="@style/Theme.Guess_2021_CS.NoActionBar">
+            android:theme="@style/Theme.Guess_2021_CS.NoActionBar"></activity>
+        <activity
+            android:name=".RecordListActivity"
+            android:label="RecordListActivity"
+            android:theme="@style/Theme.Guess_2021_CS.NoActionBar"></activity>
+
+        <activity
+            android:name=".RecordActivity"
+            android:label="RecordActivity">
+        </activity>
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            android:label="@string/app_name">
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
     </application>
 
 </manifest>
