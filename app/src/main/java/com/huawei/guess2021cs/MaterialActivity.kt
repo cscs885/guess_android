@@ -47,6 +47,9 @@ class MaterialActivity : AppCompatActivity()  {
         this.builder = AlertDialog.Builder(this)
         builder.setTitle("GuessMessege")
 
+        //val n = ediText_guessNumber.text.toString().toInt();
+//        val result = secretNumber.validate(n)
+
         viewModel.result.observe(this, Observer {result ->
             when(result)
             {
@@ -143,6 +146,8 @@ class MaterialActivity : AppCompatActivity()  {
 
             num1= ediText_inputNumber1.text.toString().toInt();
             num2= ediText_inputNumber2.text.toString().toInt();
+//            secretNumber.setSecretNum(num1,num2)
+//            Log.d(ContentValues.TAG, "oncreate:${secretNumber.getSecretNum()} ");
             viewModel.generate(num1,num2);
             Log.d(ContentValues.TAG, "oncreate:${viewModel.secret} ");
     }
@@ -150,6 +155,7 @@ class MaterialActivity : AppCompatActivity()  {
     fun guess(view :View)
     {
         val n = ediText_guessNumber.text.toString().toInt();
+        //secretNumber.validate(n)
         viewModel.guess(n);
 
         //viewModel.guess(1);

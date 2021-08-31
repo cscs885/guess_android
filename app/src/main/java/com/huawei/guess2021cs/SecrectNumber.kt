@@ -23,10 +23,17 @@ class SecretNumber {
         count_num++;
     }
 
-    fun validate(n :Int) :Int
+    fun validate(n :Int) : GameResult
     {
         var secret_number = getSecretNum();
-        return secret_number-n;
+
+        val gameResult: GameResult = when(secret_number - n)
+        {
+            0 -> GameResult.NUMBER_RIGHT
+            in 1..Int.MAX_VALUE ->GameResult.SMALLER
+            else -> GameResult.BIGGER
+        }
+        return gameResult;
     }
 
     fun reset()
@@ -38,6 +45,11 @@ class SecretNumber {
     {
         this.secret_number = 0;
     }
+}
+
+enum class GameResult
+{
+    NUMBER_RIGHT,BIGGER,SMALLER
 }
 
 //fun main()

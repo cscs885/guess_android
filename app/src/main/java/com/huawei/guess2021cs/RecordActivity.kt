@@ -8,11 +8,24 @@ import androidx.room.Room
 import com.huawei.guess2021cs.data.GameDatabase
 import com.huawei.guess2021cs.data.Record
 import kotlinx.android.synthetic.main.activity_record.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class RecordActivity : AppCompatActivity() {
+class RecordActivity : AppCompatActivity(),CoroutineScope{
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main;
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
+        job = Job()
+
         val count = intent.getIntExtra("COUNTER",-1);
         activity_record_count.setText(count.toString());
 
@@ -23,9 +36,9 @@ class RecordActivity : AppCompatActivity() {
                 .putInt("REC_COUNTER",count)
                 .putString("REC_NICKNAME",nickname)
                 .apply()
-            Thread() {
-                GameDatabase.getInstance(this)?.recordDao()?.insert(Record(nickname,count))
-            }.start();
+            launch  {
+                GameDatabase.getInstance(this@RecordActivity)?.recordDao()?.insert(Record(nickname,count))
+            }
             val intent = Intent()
             intent.putExtra("NICK",nickname)
             setResult(Activity.RESULT_OK,intent)
@@ -33,7 +46,12 @@ class RecordActivity : AppCompatActivity() {
         }
     }
 
-//    @Override
+
+    //    @Override
+    override fun onDestroy() {
+        super.onDestroy()
+        job.cancel()
+    }
 //    override fun onBackPressed(){
 //        super.onBackPressed();
 //

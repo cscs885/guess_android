@@ -52,9 +52,9 @@ class MainActivity : AppCompatActivity() {
             //num_bind++
             //println("now bindViewHolder $num_bind")
             holder.nameText.text = functions_recycler.get(position)
-            holder.itemView.setOnClickListener({
+            holder.itemView.setOnClickListener(){
                     view-> functionClicked(position)
-            })
+            }
         }
 
         override fun getItemCount(): Int {
