@@ -41,23 +41,30 @@ android {
 
 dependencies {
 
-    def lifecycle_version = "2.4.0-alpha02"
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.8'
+
+    def lifecycle_version = "2.3.1"
+
+    //>>>>>lifecycle MVVM
      //ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
-    // Annotation processor
+    // lifeCYCLE KAPT
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+    //<<<<lifecycle MVVM
+
 
     def room_version = "2.3.0"
     def coroutines_version = "1.5.0"
-    //room代码库
+    //[{room代码库
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-common:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
     //implementation "androidx.room:room-coroutines:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-    //room代码库
+    //room代码库}}}
 
     //Kotlinx Coroutines Core » 1.5.1
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"

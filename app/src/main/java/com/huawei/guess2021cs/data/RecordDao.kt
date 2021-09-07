@@ -1,9 +1,6 @@
 package com.huawei.guess2021cs.data
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 
@@ -22,6 +19,6 @@ interface RecordDao {
 //    @Query("SELECT * FROM record WHERE count < 3")
 //    fun findBestUser(): List<Record>
 //
-//    @Delete
-//    fun delete(record:Record)
+    @Delete
+    suspend fun delete(record:Record)
 }

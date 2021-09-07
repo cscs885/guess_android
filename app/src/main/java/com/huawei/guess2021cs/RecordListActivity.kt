@@ -21,6 +21,8 @@ class RecordListActivity : AppCompatActivity(),CoroutineScope {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         job = Job();
+        //record_list_recycler.setLayoutManager(LinearLayoutManager(this))
+        //record_list_recycler.setHasFixedSize(true)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record_list)
          launch {
